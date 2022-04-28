@@ -3,9 +3,29 @@ package com.bridgelabz.empwagecomputationprograms;
 public class EmployeeWage {
     public static final int IS_FULL_TIME = 2;
     public static final int IS_PART_TIME = 1;
+    private String company;
+    private int empRatePerHour;
+    private int numOfWorkingDaysPerMonth;
+    private int maxWorkingHoursPerMonth;
 
-    public static int computeEmpWage(String company, int empRatePerHour, int numOfWorkingDaysPerMonth,
-                                     int maxWorkingHoursPerMonth) {
+    public EmployeeWage(String company, int empRatePerHour, int numOfWorkingDaysPerMonth, int maxWorkingHoursPerMonth) {
+        this.company = company;
+        this.empRatePerHour = empRatePerHour;
+        this.numOfWorkingDaysPerMonth = numOfWorkingDaysPerMonth;
+        this.maxWorkingHoursPerMonth = maxWorkingHoursPerMonth;
+    }
+
+    public static void main(String[] args) {
+        EmployeeWage reliance = new EmployeeWage("Reliance", 20, 10, 60);
+        EmployeeWage dMart = new EmployeeWage("DMart", 10, 20, 80);
+        System.out.println("------------Reliance-----------");
+        reliance.computeEmpWage();
+        System.out.println();
+        System.out.println("------------DMart-----------");
+        dMart.computeEmpWage();
+    }
+
+    public void computeEmpWage() {
         System.out.println("Welcome to Employee Wage Computation Program");
         int empHrs = 0;
         int monthlyEmpWage = 0;
@@ -29,14 +49,5 @@ public class EmployeeWage {
         }
         monthlyEmpWage = totalWorkingHrs * empRatePerHour;
         System.out.println("Employee Wage for a Month: " + monthlyEmpWage);
-        return monthlyEmpWage;
-    }
-
-    public static void main(String[] args) {
-        System.out.println("------------Reliance-----------");
-        computeEmpWage("Reliance", 20, 10, 30);
-        System.out.println();
-        System.out.println("------------DMart-----------");
-        computeEmpWage("DMart", 10, 20, 40);
     }
 }
