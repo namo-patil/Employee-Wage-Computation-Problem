@@ -1,6 +1,6 @@
 package com.bridgelabz.empwagecomputationprograms;
 
-public class EmployeeWage {
+public class EmployeeWage implements IEmployeeWage {
     public static final int IS_FULL_TIME = 1;
     public static final int IS_PART_TIME = 2;
 
@@ -17,21 +17,6 @@ public class EmployeeWage {
         empWageBuilder.addCompanyEmpWage("Reliance", 10, 60, 20);
         empWageBuilder.addCompanyEmpWage("DMart", 20, 80, 10);
         empWageBuilder.computeEmpWageFromArray();
-    }
-
-    private void addCompanyEmpWage(String company, int numOfWorkingDaysPerMonth,
-                                   int maxWorkingHoursPerMonth, int empRatePerHour) {
-        companyEmpWageArray[numOfCompany] = new CompanyEmpWage(company, numOfWorkingDaysPerMonth,
-                maxWorkingHoursPerMonth, empRatePerHour);
-        numOfCompany++;
-    }
-
-    private void computeEmpWageFromArray() {
-        for (int i = 0; i < numOfCompany; i++) {
-            companyEmpWageArray[i].setMonthlyEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
-            System.out.println(companyEmpWageArray[i]);
-            System.out.println();
-        }
     }
 
     private int computeEmpWage(CompanyEmpWage companyEmpWage) {
@@ -61,5 +46,20 @@ public class EmployeeWage {
         }
         System.out.println("#Total Working Hours : " + totalWorkingHrs);
         return totalWorkingHrs * companyEmpWage.empRatePerHour;
+    }
+
+    @Override
+    public void addCompanyEmpWage(String company, int numOfWorkingDaysPerMonth, int maxWorkingHoursPerMonth, int empRatePerHour) {
+        companyEmpWageArray[numOfCompany] = new CompanyEmpWage(company, numOfWorkingDaysPerMonth, maxWorkingHoursPerMonth, empRatePerHour);
+        numOfCompany++;
+    }
+
+    @Override
+    public void computeEmpWageFromArray() {
+        for (int i = 0; i < numOfCompany; i++) {
+            companyEmpWageArray[i].setMonthlyEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
+            System.out.println(companyEmpWageArray[i]);
+            System.out.println();
+        }
     }
 }
