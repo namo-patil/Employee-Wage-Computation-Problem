@@ -1,16 +1,20 @@
 package com.bridgelabz.empwagecomputationprograms;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EmployeeWage implements IEmployeeWage {
     public static final int IS_FULL_TIME = 1;
     public static final int IS_PART_TIME = 2;
 
-    List<CompanyEmpWage> companyEmpWageList;
+    private List<CompanyEmpWage> companyEmpWageList;
+    private Map<String, CompanyEmpWage> companyToEmpWageMap;
 
     public EmployeeWage() {
         companyEmpWageList = new ArrayList<>();
+        companyToEmpWageMap = new HashMap<>();
     }
 
     public static void main(String[] args) {
@@ -19,6 +23,7 @@ public class EmployeeWage implements IEmployeeWage {
         empWageBuilder.addCompanyEmpWage("Reliance", 10, 60, 20);
         empWageBuilder.addCompanyEmpWage("DMart", 20, 80, 10);
         empWageBuilder.computeEmpWageFromArrayList();
+        System.out.println("Total wage for DMart Company: " + empWageBuilder.getTotalWage("DMart"));
     }
 
     private int computeEmpWage(CompanyEmpWage companyEmpWage) {
@@ -43,7 +48,6 @@ public class EmployeeWage implements IEmployeeWage {
                     status = "Absent";
                     empHrs = 0;
             }
-            int dailyWage = companyEmpWage.empRatePerHour * empHrs;
             totalWorkingHrs += empHrs;
             System.out.println("#DAY : " + totalWorkingDays + "  , #Status : " + status);
         }
@@ -55,6 +59,7 @@ public class EmployeeWage implements IEmployeeWage {
     public void addCompanyEmpWage(String company, int numOfWorkingDaysPerMonth, int maxWorkingHoursPerMonth, int empRatePerHour) {
         CompanyEmpWage companyEmpWage = new CompanyEmpWage(company, numOfWorkingDaysPerMonth, maxWorkingHoursPerMonth, empRatePerHour);
         companyEmpWageList.add(companyEmpWage);
+        companyToEmpWageMap.put(company, companyEmpWage);
     }
 
     @Override
@@ -65,5 +70,10 @@ public class EmployeeWage implements IEmployeeWage {
             System.out.println(companyEmpWage);
             System.out.println();
         }
+    }
+
+    @Override
+    public int getTotalWage(String company) {
+        return companyToEmpWageMap.get(company).monthlyEmpWage;
     }
 }
