@@ -1,14 +1,16 @@
 package com.bridgelabz.empwagecomputationprograms;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EmployeeWage implements IEmployeeWage {
     public static final int IS_FULL_TIME = 1;
     public static final int IS_PART_TIME = 2;
 
-    private int numOfCompany = 0;
-    private CompanyEmpWage[] companyEmpWageArray;
+    List<CompanyEmpWage> companyEmpWageList;
 
     public EmployeeWage() {
-        companyEmpWageArray = new CompanyEmpWage[5];
+        companyEmpWageList = new ArrayList<CompanyEmpWage>();
     }
 
     public static void main(String[] args) {
@@ -16,7 +18,7 @@ public class EmployeeWage implements IEmployeeWage {
         EmployeeWage empWageBuilder = new EmployeeWage();
         empWageBuilder.addCompanyEmpWage("Reliance", 10, 60, 20);
         empWageBuilder.addCompanyEmpWage("DMart", 20, 80, 10);
-        empWageBuilder.computeEmpWageFromArray();
+        empWageBuilder.computeEmpWageFromArrayList();
     }
 
     private int computeEmpWage(CompanyEmpWage companyEmpWage) {
@@ -50,15 +52,15 @@ public class EmployeeWage implements IEmployeeWage {
 
     @Override
     public void addCompanyEmpWage(String company, int numOfWorkingDaysPerMonth, int maxWorkingHoursPerMonth, int empRatePerHour) {
-        companyEmpWageArray[numOfCompany] = new CompanyEmpWage(company, numOfWorkingDaysPerMonth, maxWorkingHoursPerMonth, empRatePerHour);
-        numOfCompany++;
+        CompanyEmpWage companyEmpWage = new CompanyEmpWage(company, numOfWorkingDaysPerMonth, maxWorkingHoursPerMonth, empRatePerHour);
+        companyEmpWageList.add(companyEmpWage);
     }
 
     @Override
-    public void computeEmpWageFromArray() {
-        for (int i = 0; i < numOfCompany; i++) {
-            companyEmpWageArray[i].setMonthlyEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
-            System.out.println(companyEmpWageArray[i]);
+    public void computeEmpWageFromArrayList() {
+        for (int i = 0; i < companyEmpWageList.size(); i++) {
+            companyEmpWageList.get(i).setMonthlyEmpWage(this.computeEmpWage(companyEmpWageList.get(i)));
+            System.out.println(companyEmpWageList.get(i));
             System.out.println();
         }
     }
