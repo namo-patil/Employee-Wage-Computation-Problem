@@ -10,7 +10,7 @@ public class EmployeeWage implements IEmployeeWage {
     List<CompanyEmpWage> companyEmpWageList;
 
     public EmployeeWage() {
-        companyEmpWageList = new ArrayList<CompanyEmpWage>();
+        companyEmpWageList = new ArrayList<>();
     }
 
     public static void main(String[] args) {
@@ -43,6 +43,7 @@ public class EmployeeWage implements IEmployeeWage {
                     status = "Absent";
                     empHrs = 0;
             }
+            int dailyWage = companyEmpWage.empRatePerHour * empHrs;
             totalWorkingHrs += empHrs;
             System.out.println("#DAY : " + totalWorkingDays + "  , #Status : " + status);
         }
@@ -59,8 +60,9 @@ public class EmployeeWage implements IEmployeeWage {
     @Override
     public void computeEmpWageFromArrayList() {
         for (int i = 0; i < companyEmpWageList.size(); i++) {
-            companyEmpWageList.get(i).setMonthlyEmpWage(this.computeEmpWage(companyEmpWageList.get(i)));
-            System.out.println(companyEmpWageList.get(i));
+            CompanyEmpWage companyEmpWage = companyEmpWageList.get(i);
+            companyEmpWage.setMonthlyEmpWage(this.computeEmpWage(companyEmpWage));
+            System.out.println(companyEmpWage);
             System.out.println();
         }
     }

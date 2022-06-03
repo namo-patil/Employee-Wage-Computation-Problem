@@ -1,11 +1,14 @@
 package com.bridgelabz.empwagecomputationprograms;
 
+import java.util.Arrays;
+
 public class CompanyEmpWage {
     public final String company;
     public final int numOfWorkingDaysPerMonth;
     public final int maxWorkingHoursPerMonth;
     public final int empRatePerHour;
     public int monthlyEmpWage;
+    public int[] dailyWage;
 
     // Constructor
     public CompanyEmpWage(String company, int numOfWorkingDaysPerMonth, int maxWorkingHoursPerMonth, int empRatePerHour) {
@@ -13,6 +16,7 @@ public class CompanyEmpWage {
         this.numOfWorkingDaysPerMonth = numOfWorkingDaysPerMonth;
         this.maxWorkingHoursPerMonth = maxWorkingHoursPerMonth;
         this.empRatePerHour = empRatePerHour;
+        this.dailyWage = new int[numOfWorkingDaysPerMonth];
     }
 
     public void setMonthlyEmpWage(int monthlyEmpWage) {
@@ -21,6 +25,13 @@ public class CompanyEmpWage {
 
     @Override
     public String toString() {
-        return "Total employee wage for company " + company + " is: " + monthlyEmpWage;
+        return "CompanyEmpWage{" +
+                "company='" + company + '\'' +
+                ", numOfWorkingDaysPerMonth=" + numOfWorkingDaysPerMonth +
+                ", maxWorkingHoursPerMonth=" + maxWorkingHoursPerMonth +
+                ", empRatePerHour=" + empRatePerHour +
+                ", monthlyEmpWage=" + monthlyEmpWage +
+                ", dailyWage=" + Arrays.toString(dailyWage) +
+                '}';
     }
 }
